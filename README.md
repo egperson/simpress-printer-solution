@@ -1,4 +1,4 @@
-# Simpress Printer Solution
+# Network Printer Solution
 
 Sistema de monitoramento de impressoras em rede para gestão de suprimentos e status de dispositivos HP.
 
