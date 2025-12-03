@@ -175,4 +175,4 @@ Isso é necessário para impressoras com certificados self-signed em rede local,
 
 ## 📄 Licença
 
-MIT License - veja LICENSE para detalhes
+Mozilla Public License Version 2.0
