@@ -1,0 +1,886 @@
+{
+  "lastRun": "2025-12-02T18:10:53.651Z",
+  "devices": [
+    {
+      "name": "Device 135",
+      "url": "https://10.12.86.135",
+      "timestamp": "2025-12-02T18:10:46.632Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL006 | SALA DE OPERACOES",
+      "deviceIp": "10.12.86.135",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "10%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "100%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 136",
+      "url": "https://10.12.86.136",
+      "timestamp": "2025-12-02T18:10:46.633Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL011 | ALMOXARIFADO A F1",
+      "deviceIp": "10.12.86.136",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Non-HP Black Cartridge",
+          "level": "10%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4",
+          "type": "Any Type"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 137",
+      "url": "https://10.12.86.137",
+      "timestamp": "2025-12-02T18:10:46.634Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL008 | SALA DE ETIQUETAS F2",
+      "deviceIp": "10.12.86.137",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "<10%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 138",
+      "url": "https://10.12.86.138",
+      "timestamp": "2025-12-02T18:10:46.634Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL009 | RECEBIMENTO FISCAL",
+      "deviceIp": "10.12.86.138",
+      "machineStatus": "Ready",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "70%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "90%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 139",
+      "url": "https://10.12.86.139",
+      "timestamp": "2025-12-02T18:10:46.635Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL010 | CDF EXPEDICAO | ZR57",
+      "deviceIp": "10.12.86.139",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "80%*"
+        },
+        {
+          "name": "Maintenance Kit",
+          "level": "90%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4",
+          "type": "Any Type"
+        },
+        {
+          "name": "Front bins",
+          "status": "OK",
+          "capacity": "1300 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 140",
+      "url": "https://10.12.86.140",
+      "timestamp": "2025-12-02T18:10:46.636Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL007 | ALMOXARIFADO A F1",
+      "deviceIp": "10.12.86.140",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "<10%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 141",
+      "url": "https://10.12.86.141",
+      "timestamp": "2025-12-02T18:10:46.636Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL012 | RECURSOS HUMANOS",
+      "deviceIp": "10.12.86.141",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Non-HP Black Cartridge",
+          "level": "90%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "70%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 142",
+      "url": "https://10.12.86.142",
+      "timestamp": "2025-12-02T18:10:46.637Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL013 | RECEBIMENTO FISCAL",
+      "deviceIp": "10.12.86.142",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "40%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "80%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 143",
+      "url": "https://10.12.86.143",
+      "timestamp": "2025-12-02T18:10:46.637Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL014 | ALMOXARIFADO A F1",
+      "deviceIp": "10.12.86.143",
+      "machineStatus": "Upgrade failed, must resend upgrade",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "80%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "90%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 144",
+      "url": "https://10.12.86.144",
+      "timestamp": "2025-12-02T18:10:46.638Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL015 | ALMOXARIFADO A F1",
+      "deviceIp": "10.12.86.144",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "40%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "100%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 145",
+      "url": "https://10.12.86.145",
+      "timestamp": "2025-12-02T18:10:46.638Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL016 | ADM AMBULATORIO",
+      "deviceIp": "10.12.86.145",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Non-HP Black Cartridge",
+          "level": "40%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "10%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 146",
+      "url": "https://10.12.86.146",
+      "timestamp": "2025-12-02T18:10:46.639Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL017 | RECEPCAO",
+      "deviceIp": "10.12.86.146",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "100%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "Letter",
+          "type": "Any Type"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 147",
+      "url": "https://10.12.86.147",
+      "timestamp": "2025-12-02T18:10:46.639Z",
+      "status": "error",
+      "error": "timeout of 7000ms exceeded"
+    },
+    {
+      "name": "Device 148",
+      "url": "https://10.12.86.148",
+      "timestamp": "2025-12-02T18:10:46.640Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL019 | ALMOXARIFADO B F1",
+      "deviceIp": "10.12.86.148",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "50%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 149",
+      "url": "https://10.12.86.149",
+      "timestamp": "2025-12-02T18:10:46.640Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL020 | WPS CCM SALA METAIS F1",
+      "deviceIp": "10.12.86.149",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "10%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 150",
+      "url": "https://10.12.86.150",
+      "timestamp": "2025-12-02T18:10:47.245Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL021 | PCPM F1",
+      "deviceIp": "10.12.86.150",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "70%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "100%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 151",
+      "url": "https://10.12.86.151",
+      "timestamp": "2025-12-02T18:10:47.341Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL022 | PORTARIA CENTRAL",
+      "deviceIp": "10.12.86.151",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "90%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "100%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 152",
+      "url": "https://10.12.86.152",
+      "timestamp": "2025-12-02T18:10:47.344Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL023 | ENGENHARIA INDUSTRIAL",
+      "deviceIp": "10.12.86.152",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Black Cartridge",
+          "level": "<10%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "100%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Plain"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 153",
+      "url": "https://10.12.86.153",
+      "timestamp": "2025-12-02T18:10:47.359Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL024 | ENGENHARIA INDUSTRIAL",
+      "deviceIp": "10.12.86.153",
+      "machineStatus": "Sleep mode on",
+      "supplies": [
+        {
+          "name": "Yellow Cartridge",
+          "level": "40%*"
+        },
+        {
+          "name": "Magenta Cartridge",
+          "level": "100%*"
+        },
+        {
+          "name": "Non-HP Cyan Cartridge",
+          "level": "90%*"
+        },
+        {
+          "name": "Black Cartridge",
+          "level": "90%*"
+        },
+        {
+          "name": "Fuser Kit",
+          "level": "90%*"
+        },
+        {
+          "name": "Document Feeder Kit",
+          "level": "100%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "OK",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "OK",
+          "capacity": "550 sheets",
+          "size": "A4 (210x297 mm)",
+          "type": "Any Type"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "250 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    },
+    {
+      "name": "Device 154",
+      "url": "https://10.12.86.154",
+      "timestamp": "2025-12-02T18:10:47.396Z",
+      "status": "ok",
+      "statusCode": 200,
+      "title": "HP » Device Status",
+      "deviceName": "RCL025 | SALA DE OPERACOES",
+      "deviceIp": "10.12.86.154",
+      "machineStatus": "Ready",
+      "supplies": [
+        {
+          "name": "Yellow Cartridge",
+          "level": "90%*"
+        },
+        {
+          "name": "Magenta Cartridge",
+          "level": "80%*"
+        },
+        {
+          "name": "Cyan Cartridge",
+          "level": "<10%*"
+        },
+        {
+          "name": "Black Cartridge",
+          "level": "40%*"
+        },
+        {
+          "name": "Drum 1",
+          "level": "40%*"
+        },
+        {
+          "name": "Drum 2",
+          "level": "40%*"
+        },
+        {
+          "name": "Drum 3",
+          "level": "40%*"
+        },
+        {
+          "name": "Drum 4",
+          "level": "20%*"
+        },
+        {
+          "name": "Transfer Kit",
+          "level": "50%*"
+        },
+        {
+          "name": "Fuser Kit",
+          "level": "40%*"
+        }
+      ],
+      "trays": [
+        {
+          "name": "Tray 1",
+          "status": "Empty",
+          "capacity": "100 sheets",
+          "size": "Any Size",
+          "type": "Any Type"
+        },
+        {
+          "name": "Tray 2",
+          "status": "10 - 20%",
+          "capacity": "550 sheets",
+          "size": "A4",
+          "type": "Plain"
+        },
+        {
+          "name": "Tray 3",
+          "status": "< 10%",
+          "capacity": "550 sheets",
+          "size": "A3",
+          "type": "Plain"
+        },
+        {
+          "name": "Tray 4",
+          "status": "< 10%",
+          "capacity": "550 sheets",
+          "size": "A3",
+          "type": "Any Type"
+        },
+        {
+          "name": "Standard bin",
+          "status": "OK",
+          "capacity": "500 sheets",
+          "size": "N/A",
+          "type": "N/A"
+        }
+      ]
+    }
+  ]
+}

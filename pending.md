@@ -1,0 +1,8 @@
+- Adicionar gestão de inventário
+- Terminar funções incabadas
+- Fixar possiveis erros
+- adicionar relação entre o consumivel que a impressora usa e a disponibilidade no estoque
+- fixar o layout
+- deixar mais dinamico
+- adicionar modais
+- deixar a ui mais consistente

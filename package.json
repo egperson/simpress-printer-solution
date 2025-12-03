@@ -1,0 +1,16 @@
+{
+  "name": "printer-monitor-proto",
+  "version": "0.1.0",
+  "description": "Protótipo simples de monitoramento de impressoras (Node.js + Express)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.5.0",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.18.2",
+    "node-cron": "^3.0.2",
+    "sqlite3": "^5.1.7"
+  }
+}

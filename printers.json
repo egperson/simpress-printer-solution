@@ -1,0 +1,10 @@
+{
+  "scan": {
+    "enabled": true,
+    "base": "10.12.86.",
+    "start": 135,
+    "end": 200,
+    "protocol": "https",
+    "concurrency": 15
+  }
+}

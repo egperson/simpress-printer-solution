@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dashboard - Monitor de Impressoras</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <h2>Printer<span>Monitor</span></h2>
+        </div>
+        <div class="filters">
+          <input id="globalSearch" placeholder="Pesquisar por nome ou IP" />
+          <label>Tipo</label>
+          <select id="filterType">
+            <option value="all">Todos</option>
+            <option value="color">Coloridas</option>
+            <option value="mono">PB</option>
+          </select>
+          <label>Status</label>
+          <select id="filterStatus">
+            <option value="all">Todos</option>
+            <option value="ok">OK</option>
+            <option value="error">Erro</option>
+          </select>
+          <label>Mostrar níveis abaixo de (%)</label>
+          <input id="lowThreshold" type="range" min="0" max="100" value="15" />
+          <div class="threshold-value"><span id="thresholdValue">15</span>%</div>
+          <button id="applyFilters" class="btn">Aplicar filtros</button>
+          <button id="clearFilters" class="btn ghost">Limpar</button>
+        </div>
+        <div class="about">
+          <small>Atualiza a cada 30 minutos. Teste rápido disponível no topo.</small>
+        </div>
+      </aside>
+
+      <div class="main-area">
+        <header class="main-header">
+          <div class="left">
+            <h1>Dashboard de Impressoras</h1>
+            <div class="meta" id="lastRun">Última coleta: —</div>
+          </div>
+          <div class="right">
+            <div class="quick-test">
+              <input id="testIp" type="text" placeholder="10.12.86.154 or https://10.12.86.154" />
+              <button id="testBtn" class="btn">Testar</button>
+              <button id="refresh" class="btn primary"><i class="fa-solid fa-arrows-rotate"></i> Atualizar</button>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <section id="statusGrid" class="grid">
+            <div class="empty">Carregando...</div>
+          </section>
+        </main>
+
+        <footer class="main-footer">
+          <div id="statusSummary"></div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
