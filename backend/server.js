@@ -317,8 +317,8 @@ app.post('/api/collect', async (req, res) => {
   }
 });
 
-// Cron Schedule (every 30 mins)
-cron.schedule('*/30 * * * *', () => {
+// Cron Schedule (every 15 mins)
+cron.schedule('*/15 * * * *', () => {
   console.log('Agendador: iniciando coleta', new Date().toISOString());
   runCollection().then(() => console.log('Coleta concluída')).catch(e => console.error(e));
 });

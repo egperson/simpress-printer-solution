@@ -34,7 +34,7 @@
     "start": 100,
     "end": 200,
     "protocol": "https",
-    "concurrency": 15
+    "concurrency": 30
   },
   "threshold": 15
 }
