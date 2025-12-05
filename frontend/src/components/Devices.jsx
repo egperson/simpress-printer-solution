@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Modal from './Modal'
+import CustomSelect from './CustomSelect'
+import CustomInput from './CustomInput'
 
-export default function Devices({ data, pushToast, threshold }) {
+export default function Devices({ data, pushToast, threshold, searchRef }) {
   const [loading, setLoading] = useState(false)
   const [devices, setDevices] = useState([])
 
@@ -14,6 +16,9 @@ export default function Devices({ data, pushToast, threshold }) {
   const pageSize = 10
   const [filterStatus, setFilterStatus] = useState('all')
   const [filterType, setFilterType] = useState('all')
+  const [filterSupplyLevel, setFilterSupplyLevel] = useState('all')
+  const [filterLocation, setFilterLocation] = useState('all')
+  const [filterFavorites, setFilterFavorites] = useState(false)
   const [sortBy, setSortBy] = useState('name')
 
   function getId(d) {
@@ -112,14 +117,52 @@ export default function Devices({ data, pushToast, threshold }) {
   }
 
   function filteredList() {
+    const searchQuery = searchRef?.current?.value?.toLowerCase() || ''
+    const favs = getFavs()
+
     return devices.filter(d => {
+      // Search filter
+      if (searchQuery) {
+        const matchesName = (d.deviceName || d.name || '').toLowerCase().includes(searchQuery)
+        const matchesIp = (d.deviceIp || d.url || '').toLowerCase().includes(searchQuery)
+        if (!matchesName && !matchesIp) return false
+      }
+
+      // Status filter
       if (filterStatus !== 'all') {
         if (filterStatus === 'ok' && d.status !== 'ok') return false
         if (filterStatus === 'error' && d.status === 'ok') return false
       }
+
+      // Type filter
       if (filterType !== 'all') {
         if ((d.type || '').toLowerCase() !== filterType) return false
       }
+
+      // Supply level filter
+      if (filterSupplyLevel !== 'all' && d.supplies && d.supplies.length > 0) {
+        const hasSupplyInRange = d.supplies.some(s => {
+          const level = parseFloat((s.level || '').toString().replace('%', '')) || 0
+          if (filterSupplyLevel === 'critical') return level < 10
+          if (filterSupplyLevel === 'low') return level >= 10 && level < 30
+          if (filterSupplyLevel === 'medium') return level >= 30 && level < 70
+          if (filterSupplyLevel === 'high') return level >= 70
+          return true
+        })
+        if (!hasSupplyInRange) return false
+      }
+
+      // Location filter
+      if (filterLocation !== 'all') {
+        if ((d.location || '') !== filterLocation) return false
+      }
+
+      // Favorites filter
+      if (filterFavorites) {
+        const id = getId(d)
+        if (!favs.includes(id)) return false
+      }
+
       return true
     }).sort((a, b) => {
       if (sortBy === 'name') return ('' + (a.deviceName || a.name || '')).localeCompare(b.deviceName || b.name || '')
@@ -127,6 +170,9 @@ export default function Devices({ data, pushToast, threshold }) {
       return 0
     })
   }
+
+  // Get unique locations for filter
+  const uniqueLocations = [...new Set(devices.map(d => d.location).filter(Boolean))]
 
   const list = filteredList()
   const start = (page - 1) * pageSize
@@ -150,27 +196,103 @@ export default function Devices({ data, pushToast, threshold }) {
         </div>
       </div>
 
-      <div className="card mb-4 p-3">
-        <div className="flex gap-2 items-center mb-3">
-          <label className="text-sm text-white/60">Status</label>
-          <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="px-2 py-1 bg-transparent border border-white/6 rounded">
-            <option value="all">Todos</option>
-            <option value="ok">OK</option>
-            <option value="error">Erro</option>
-          </select>
-          <label className="text-sm text-white/60">Tipo</label>
-          <select value={filterType} onChange={e => setFilterType(e.target.value)} className="px-2 py-1 bg-transparent border border-white/6 rounded">
-            <option value="all">Todos</option>
-            <option value="color">Colorida</option>
-            <option value="mono">Monocromática</option>
-          </select>
-          <label className="text-sm text-white/60">Ordenar</label>
-          <select value={sortBy} onChange={e => setSortBy(e.target.value)} className="px-2 py-1 bg-transparent border border-white/6 rounded">
-            <option value="name">Nome</option>
-            <option value="status">Status</option>
-          </select>
+      <div className="card mb-4 p-4">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold text-lg">Filtros Avançados</h3>
+          <button
+            onClick={() => {
+              setFilterStatus('all')
+              setFilterType('all')
+              setFilterSupplyLevel('all')
+              setFilterLocation('all')
+              setFilterFavorites(false)
+            }}
+            className="px-3 py-1.5 text-sm rounded border border-white/10 hover:bg-white/5 transition"
+          >
+            Limpar Filtros
+          </button>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <CustomSelect
+            label="Status"
+            value={filterStatus}
+            onChange={setFilterStatus}
+            icon="info"
+            options={[
+              { value: 'all', label: 'Todos' },
+              { value: 'ok', label: 'Online', icon: 'check_circle' },
+              { value: 'error', label: 'Offline', icon: 'error' }
+            ]}
+          />
+
+          <CustomSelect
+            label="Tipo"
+            value={filterType}
+            onChange={setFilterType}
+            icon="print"
+            options={[
+              { value: 'all', label: 'Todos' },
+              { value: 'color', label: 'Colorida', icon: 'palette' },
+              { value: 'mono', label: 'Monocromática', icon: 'filter_b_and_w' }
+            ]}
+          />
+
+          <CustomSelect
+            label="Nível de Consumível"
+            value={filterSupplyLevel}
+            onChange={setFilterSupplyLevel}
+            icon="battery_alert"
+            searchable={false}
+            options={[
+              { value: 'all', label: 'Todos' },
+              { value: 'critical', label: 'Crítico (< 10%)', icon: 'report' },
+              { value: 'low', label: 'Baixo (10-30%)', icon: 'warning' },
+              { value: 'medium', label: 'Médio (30-70%)', icon: 'info' },
+              { value: 'high', label: 'Alto (> 70%)', icon: 'check_circle' }
+            ]}
+          />
+
+          <CustomSelect
+            label="Localização"
+            value={filterLocation}
+            onChange={setFilterLocation}
+            icon="location_on"
+            searchable={true}
+            options={[
+              { value: 'all', label: 'Todas' },
+              ...uniqueLocations.map(loc => ({ value: loc, label: loc, icon: 'place' }))
+            ]}
+          />
+        </div>
+
+        <div className="flex gap-4 mt-4">
+          <CustomSelect
+            label="Ordenar Por"
+            value={sortBy}
+            onChange={setSortBy}
+            icon="sort"
+            options={[
+              { value: 'name', label: 'Nome', icon: 'text_fields' },
+              { value: 'status', label: 'Status', icon: 'signal_cellular_alt' }
+            ]}
+          />
+
+          <div className="flex items-end">
+            <button
+              onClick={() => setFilterFavorites(!filterFavorites)}
+              className={`px-4 py-2.5 rounded border transition ${filterFavorites
+                ? 'bg-yellow-500/20 border-yellow-500/50 text-yellow-300'
+                : 'border-white/10 hover:bg-white/5'
+                }`}
+            >
+              <span className="flex items-center gap-2">
+                <span className="mi">{filterFavorites ? 'star' : 'star_border'}</span>
+                <span className="text-sm">Apenas Favoritos</span>
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="card">

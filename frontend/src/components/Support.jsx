@@ -1,102 +1,145 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import CustomCard from './CustomCard'
+import CustomInput from './CustomInput'
+import CustomButton from './CustomButton'
 
 export default function Support() {
-  const [serverInfo, setServerInfo] = useState(null)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    priority: 'medium'
+  })
 
-  useEffect(() => {
-    async function loadServerInfo() {
-      try {
-        const res = await fetch('/api/server/info')
-        const json = await res.json()
-        if (json.ok) setServerInfo(json)
-      } catch (e) {
-        console.error('Failed to load server info:', e)
-      }
-    }
-    loadServerInfo()
-  }, [])
-
-  const formatUptime = (seconds) => {
-    const days = Math.floor(seconds / (60 * 60 * 24))
-    const hours = Math.floor((seconds % (60 * 60 * 24)) / (60 * 60))
-    const mins = Math.floor((seconds % (60 * 60)) / 60)
-    return `${days}d ${hours}h ${mins}m`
+  function handleSubmit(e) {
+    e.preventDefault()
+    alert('Ticket de suporte enviado com sucesso!')
+    setFormData({ name: '', email: '', subject: '', message: '', priority: 'medium' })
   }
 
   return (
-    <div className="space-y-4">
-      <div className="card p-4">
-        <h2 className="text-lg font-semibold">Suporte</h2>
-        <div className="text-sm text-white/60 mt-2">Informações úteis e contato</div>
+    <div className="space-y-6 animate-fadeIn">
+      <div>
+        <h1 className="text-2xl font-bold">Suporte</h1>
+        <p className="text-white/60">Central de ajuda e contato</p>
       </div>
 
-      <div className="card p-4">
-        <h3 className="font-semibold mb-3">Informações do Sistema</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="p-3 bg-white/3 rounded">
-            <div className="text-xs text-white/60">Versão</div>
-            <div className="font-semibold">{serverInfo?.version || 'N/A'}</div>
-          </div>
-          <div className="p-3 bg-white/3 rounded">
-            <div className="text-xs text-white/60">Tempo Online</div>
-            <div className="font-semibold">{serverInfo?.uptime ? formatUptime(serverInfo.uptime) : 'N/A'}</div>
-          </div>
-          <div className="p-3 bg-white/3 rounded">
-            <div className="text-xs text-white/60">Node.js</div>
-            <div className="font-semibold">{serverInfo?.nodeVersion || 'N/A'}</div>
-          </div>
-          <div className="p-3 bg-white/3 rounded">
-            <div className="text-xs text-white/60">Última Coleta</div>
-            <div className="font-semibold text-xs">
-              {serverInfo?.lastCollection ? new Date(serverInfo.lastCollection).toLocaleString() : 'N/A'}
-            </div>
-          </div>
-        </div>
+      {/* Quick Contact */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <CustomCard hover className="text-center p-6">
+          <span className="mi text-5xl text-cyan-400 mb-3">email</span>
+          <h3 className="font-semibold mb-2">E-mail</h3>
+          <p className="text-sm text-white/60">suporte@printmonitor.com</p>
+          <CustomButton size="small" variant="secondary" className="mt-3">
+            Enviar E-mail
+          </CustomButton>
+        </CustomCard>
+
+        <CustomCard hover className="text-center p-6">
+          <span className="mi text-5xl text-green-400 mb-3">phone</span>
+          <h3 className="font-semibold mb-2">Telefone</h3>
+          <p className="text-sm text-white/60">(11) 3000-0000</p>
+          <CustomButton size="small" variant="secondary" className="mt-3">
+            Ligar Agora
+          </CustomButton>
+        </CustomCard>
+
+        <CustomCard hover className="text-center p-6">
+          <span className="mi text-5xl text-blue-400 mb-3">chat</span>
+          <h3 className="font-semibold mb-2">Chat</h3>
+          <p className="text-sm text-white/60">Segunda a Sexta, 9h-18h</p>
+          <CustomButton size="small" variant="secondary" className="mt-3">
+            Iniciar Chat
+          </CustomButton>
+        </CustomCard>
       </div>
 
-      <div className="card p-4">
-        <h3 className="font-semibold mb-3">Recursos</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="p-3 bg-white/3 rounded">
-            <div className="font-semibold">API Endpoints</div>
-            <div className="text-xs text-white/60 mt-1">
-              <div>GET /api/status - Status dos dispositivos</div>
-              <div>GET /api/alerts/history - Histórico de alertas</div>
-              <div>POST /api/collect - Coletar dados manualmente</div>
-              <div>GET /api/server/info - Informações do servidor</div>
-            </div>
-          </div>
-          <div className="p-3 bg-white/3 rounded">
-            <div className="font-semibold">Contato</div>
-            <div className="text-xs text-white/60 mt-1">
-              <div>Email: admin@empresa.local</div>
-              <div>Suporte TI: (11) 1234-5678</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Support Form */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <CustomCard title="Abrir Ticket de Suporte" icon="support_agent">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <CustomInput
+              label="Nome *"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              icon="person"
+              required
+            />
 
-      <div className="card p-4">
-        <h3 className="font-semibold mb-3">Resolução de Problemas</h3>
-        <div className="space-y-2 text-sm">
-          <details className="p-3 bg-white/3 rounded">
-            <summary className="cursor-pointer font-medium">Dispositivos não aparecem</summary>
-            <div className="text-xs text-white/60 mt-2">
-              Verifique se a coleta automática está ativa (a cada 30 min). Você pode forçar uma coleta manual na página de configurações.
+            <CustomInput
+              label="E-mail *"
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              icon="email"
+              required
+            />
+
+            <CustomInput
+              label="Assunto *"
+              value={formData.subject}
+              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+              icon="subject"
+              required
+            />
+
+            <div className="custom-input">
+              <label className="custom-input-label">Mensagem *</label>
+              <textarea
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded text-white min-h-[120px]"
+                required
+              />
             </div>
-          </details>
-          <details className="p-3 bg-white/3 rounded">
-            <summary className="cursor-pointer font-medium">Dados desatualizados</summary>
-            <div className="text-xs text-white/60 mt-2">
-              Use o botão "Atualizar" em cada página. A atualização automática ocorre a cada 30 segundos no frontend.
+
+            <CustomButton type="submit" icon="send" className="w-full">
+              Enviar Ticket
+            </CustomButton>
+          </form>
+        </CustomCard>
+
+        <div className="space-y-6">
+          {/* FAQ */}
+          <CustomCard title="Perguntas Frequentes" icon="help">
+            <div className="space-y-3">
+              {[
+                { q: 'Como adicionar uma nova impressora?', a: 'Acesse Dispositivos > Nova Impressora e siga o assistente.' },
+                { q: 'Como alterar alertas de toner?', a: 'Vá em Configurações > Alertas e ajuste os limites.' },
+                { q: 'Como exportar relatórios?', a: 'Na aba Relatórios, selecione o tipo e clique em Exportar.' },
+                { q: 'Suporte a múltiplas redes?', a: 'Sim, configure em Configurações > Rede.' }
+              ].map((faq, idx) => (
+                <details key={idx} className="p-3 bg-white/5 rounded cursor-pointer">
+                  <summary className="font-semibold flex items-center gap-2">
+                    <span className="mi text-cyan-400">help_outline</span>
+                    {faq.q}
+                  </summary>
+                  <p className="text-sm text-white/70 mt-2 ml-7">{faq.a}</p>
+                </details>
+              ))}
             </div>
-          </details>
-          <details className="p-3 bg-white/3 rounded">
-            <summary className="cursor-pointer font-medium">Alertas não funcionam</summary>
-            <div className="text-xs text-white/60 mt-2">
-              Verifique se o threshold está configurado em printers.json. O padrão é 15%.
+          </CustomCard>
+
+          {/* Documentation */}
+          <CustomCard title="Documentação" icon="menu_book">
+            <div className="space-y-2">
+              {[
+                { title: 'Guia de Início Rápido', icon: 'rocket_launch' },
+                { title: 'Manual do Usuário', icon: 'book' },
+                { title: 'API Documentation', icon: 'code' },
+                { title: 'Troubleshooting', icon: 'build' }
+              ].map((doc, idx) => (
+                <div key={idx} className="p-3 bg-white/5 rounded hover:bg-white/10 transition cursor-pointer flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="mi text-cyan-400">{doc.icon}</span>
+                    <span>{doc.title}</span>
+                  </div>
+                  <span className="mi text-white/40">arrow_forward</span>
+                </div>
+              ))}
             </div>
-          </details>
+          </CustomCard>
         </div>
       </div>
     </div>

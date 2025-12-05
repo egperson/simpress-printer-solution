@@ -41,19 +41,28 @@ body {
 
 /* .app{min-height:100vh;} */
 .layout {
-  display: grid;
-  grid-template-columns: 270px 1fr;
-  gap: 18px;
   max-width: 100vw;
-  margin: 0 auto
+  margin: 0 auto;
 }
 
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 270px;
+  height: 100vh;
+  overflow-y: auto;
   background: black;
-  padding: 16px;
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
   border-right: 1px solid rgba(255, 255, 255, 0.3);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1rem;
+  z-index: 40;
+}
+
+.main-content {
+  margin-left: 270px;
+  padding: 1rem;
 }
 
 .card {
@@ -579,7 +588,7 @@ input::placeholder {
 }
 
 .modal-card {
-  width: auto%;
+  width: auto;
   background: #000000;
   border-radius: 12px;
   padding: 1rem;
@@ -622,4 +631,281 @@ input::placeholder {
 .modal-card input,
 .modal-card button {
   border: 1px solid rgba(255, 255, 255, 0.5);
+}
+/* Progress Modal Animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Custom Select Styles */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.custom-select-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.custom-select-trigger:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.custom-select-trigger.open {
+  border-color: rgba(6, 182, 212, 0.5);
+  background: rgba(6, 182, 212, 0.05);
+}
+
+.custom-select-value {
+  flex: 1;
+  color: #e6eef8;
+  font-size: 0.875rem;
+}
+
+.custom-select-arrow {
+  color: rgba(255, 255, 255, 0.6);
+  transition: transform 0.2s ease;
+  font-size: 20px;
+}
+
+.custom-select-arrow.rotate {
+  transform: rotate(180deg);
+}
+
+.custom-select-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  max-height: 300px;
+  overflow: hidden;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-select-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.custom-select-search input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e6eef8;
+  font-size: 0.875rem;
+}
+
+.custom-select-options {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.custom-select-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+}
+
+.custom-select-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.custom-select-option.selected {
+  background: rgba(6, 182, 212, 0.15);
+  color: #06b6d4;
+}
+
+.custom-select-option.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.custom-select-option .check {
+  margin-left: auto;
+  color: #06b6d4;
+}
+
+/* Custom Input Styles */
+.custom-input {
+  width: 100%;
+}
+
+.custom-input-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.custom-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.custom-input-field {
+  flex: 1;
+  padding: 0.625rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: #e6eef8;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.custom-input-field.has-icon-left {
+  padding-left: 2.5rem;
+}
+
+.custom-input-field.has-icon-right {
+  padding-right: 2.5rem;
+}
+
+.custom-input-field:focus {
+  border-color: rgba(6, 182, 212, 0.5);
+  background: rgba(6, 182, 212, 0.05);
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.1);
+}
+
+.custom-input-field::placeholder {
+  color: rgba(230, 238, 248, 0.4);
+}
+
+.custom-input-icon {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.custom-input-icon.left {
+  left: 0.75rem;
+}
+
+.custom-input-icons-right {
+  position: absolute;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.custom-input-clear,
+.custom-input-toggle-password {
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.custom-input-clear:hover,
+.custom-input-toggle-password:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.custom-input.error .custom-input-field {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.custom-input-error {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #f87171;
+}
+
+/* Custom Checkbox Styles */
+.custom-checkbox-container {
+  display: inline-flex;
+  align-items: center;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.custom-checkbox.checked,
+.custom-checkbox.indeterminate {
+  background: #06b6d4;
+  border-color: #06b6d4;
+}
+
+.custom-checkbox-container:hover .custom-checkbox {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Dashboard Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
 }

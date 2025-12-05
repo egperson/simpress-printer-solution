@@ -138,6 +138,7 @@ async function collect(printersConfig, opts = {}) {
     const successfulDevices = results.filter(d => d.status === 'ok');
 
     return { lastRun: new Date().toISOString(), devices: successfulDevices };
+
 }
 
 module.exports = { collect };

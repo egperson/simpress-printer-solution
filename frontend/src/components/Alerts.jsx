@@ -1,110 +1,262 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import CustomCard from './CustomCard'
+import CustomSelect from './CustomSelect'
+import CustomButton from './CustomButton'
+import CustomCheckbox from './CustomCheckbox'
 
-export default function Alerts({ pushToast }) {
+export default function Alerts() {
   const [alerts, setAlerts] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [filter, setFilter] = useState({ type: 'all', deviceId: '' })
-
-  async function loadAlerts() {
-    setLoading(true)
-    try {
-      const params = new URLSearchParams()
-      params.append('limit', '100')
-      if (filter.type !== 'all') params.append('type', filter.type)
-      if (filter.deviceId) params.append('deviceId', filter.deviceId)
-
-      const res = await fetch(`/api/alerts/history?${params}`)
-      const json = await res.json()
-      if (json.ok) {
-        setAlerts(json.alerts || [])
-      }
-    } catch (e) {
-      if (pushToast) pushToast({ title: 'Erro', msg: e.message, type: 'error' })
-    } finally {
-      setLoading(false)
-    }
-  }
+  const [filterType, setFilterType] = useState('all')
+  const [filterRead, setFilterRead] = useState('all')
+  const [sortBy, setSortBy] = useState('date')
 
   useEffect(() => {
-    loadAlerts()
-    const interval = setInterval(loadAlerts, 60000) // Refresh every minute
-    return () => clearInterval(interval)
-  }, [filter])
+    try {
+      const raw = localStorage.getItem('monitor.alerts')
+      if (raw) setAlerts(JSON.parse(raw))
+    } catch (e) { console.error(e) }
+  }, [])
 
-  const uniqueDevices = [...new Set(alerts.map(a => a.deviceId).filter(Boolean))]
+  function saveAlerts(newAlerts) {
+    localStorage.setItem('monitor.alerts', JSON.stringify(newAlerts))
+    setAlerts(newAlerts)
+  }
+
+  function markAsRead(id) {
+    const updated = alerts.map(a => a.id === id ? { ...a, read: true } : a)
+    saveAlerts(updated)
+  }
+
+  function markAllAsRead() {
+    const updated = alerts.map(a => ({ ...a, read: true }))
+    saveAlerts(updated)
+  }
+
+  function deleteAlert(id) {
+    if (!confirm('Remover este alerta?')) return
+    saveAlerts(alerts.filter(a => a.id !== id))
+  }
+
+  function clearAll() {
+    if (!confirm('Limpar todos os alertas?')) return
+    saveAlerts([])
+  }
+
+  const getPriorityIcon = (priority) => {
+    if (priority === 'critical') return { icon: 'report', color: 'red' }
+    if (priority === 'high') return { icon: 'warning', color: 'orange' }
+    if (priority === 'medium') return { icon: 'info', color: 'yellow' }
+    return { icon: 'notifications', color: 'blue' }
+  }
+
+  const filteredAlerts = alerts
+    .filter(a => {
+      if (filterType !== 'all' && a.type !== filterType) return false
+      if (filterRead === 'unread' && a.read) return false
+      if (filterRead === 'read' && !a.read) return false
+      return true
+    })
+    .sort((a, b) => {
+      if (sortBy === 'date') return new Date(b.timestamp || 0) - new Date(a.timestamp || 0)
+      if (sortBy === 'priority') {
+        const priorities = { critical: 4, high: 3, medium: 2, low: 1 }
+        return (priorities[b.priority] || 0) - (priorities[a.priority] || 0)
+      }
+      return 0
+    })
+
+  const unreadCount = alerts.filter(a => !a.read).length
 
   return (
-    <div className="space-y-4">
-      <div className="card p-4 flex items-center justify-between">
+    <div className="space-y-6 animate-fadeIn">
+      {/* Header */}
+      <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold">Alertas</h2>
-          <div className="text-sm text-white/60">Histórico de alertas do sistema</div>
+          <h1 className="text-2xl font-bold flex items-center gap-2">
+            Alertas
+            {unreadCount > 0 && (
+              <span className="px-2 py-0.5 bg-red-500 text-white text-sm rounded-full">
+                {unreadCount}
+              </span>
+            )}
+          </h1>
+          <p className="text-white/60">Central de notificações do sistema</p>
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={loadAlerts} className="px-3 py-2 rounded border border-white/6">
-            Atualizar
-          </button>
+        <div className="flex gap-2">
+          <CustomButton
+            icon="done_all"
+            variant="secondary"
+            onClick={markAllAsRead}
+            disabled={unreadCount === 0}
+          >
+            Marcar Todas como Lidas
+          </CustomButton>
+          <CustomButton
+            icon="delete_sweep"
+            variant="danger"
+            onClick={clearAll}
+            disabled={alerts.length === 0}
+          >
+            Limpar Tudo
+          </CustomButton>
         </div>
       </div>
 
-      <div className="card p-4">
-        <div className="flex gap-3 items-center mb-4">
-          <div>
-            <label className="text-xs text-white/60 block mb-1">Tipo</label>
-            <select
-              value={filter.type}
-              onChange={e => setFilter({ ...filter, type: e.target.value })}
-              className="px-2 py-1 bg-transparent border border-white/6 rounded"
-            >
-              <option value="all">Todos</option>
-              <option value="low-supply">Consumível Baixo</option>
-              <option value="error">Erro</option>
-            </select>
-          </div>
-          <div>
-            <label className="text-xs text-white/60 block mb-1">Dispositivo</label>
-            <select
-              value={filter.deviceId}
-              onChange={e => setFilter({ ...filter, deviceId: e.target.value })}
-              className="px-2 py-1 bg-transparent border border-white/6 rounded"
-            >
-              <option value="">Todos</option>
-              {uniqueDevices.map(d => (
-                <option key={d} value={d}>{d}</option>
-              ))}
-            </select>
-          </div>
-        </div>
+      {/* Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <CustomCard hover className="text-center p-4">
+          <span className="mi text-4xl">notifications</span>
+          <div className="text-2xl font-bold mt-2">{alerts.length}</div>
+          <div className="text-sm text-white/60">Total</div>
+        </CustomCard>
 
-        {loading && <div className="text-sm text-white/60 p-4">Carregando...</div>}
-        {!loading && alerts.length === 0 && <div className="text-sm text-white/60 p-4">Nenhum alerta encontrado</div>}
+        <CustomCard variant="danger" hover className="text-center p-4">
+          <span className="mi text-4xl text-red-400">notifications_active</span>
+          <div className="text-2xl font-bold text-red-400 mt-2">{unreadCount}</div>
+          <div className="text-sm text-white/60">Não Lidas</div>
+        </CustomCard>
 
-        <div className="space-y-2">
-          {alerts.map(alert => (
-            <div key={alert.id} className="p-3 bg-white/5 rounded border border-white/10">
-              <div className="flex items-start justify-between">
+        <CustomCard variant="warning" hover className="text-center p-4">
+          <span className="mi text-4xl text-orange-400">report</span>
+          <div className="text-2xl font-bold text-orange-400 mt-2">
+            {alerts.filter(a => a.priority === 'critical').length}
+          </div>
+          <div className="text-sm text-white/60">Críticos</div>
+        </CustomCard>
+
+        <CustomCard variant="primary" hover className="text-center p-4">
+          <span className="mi text-4xl text-blue-400">schedule</span>
+          <div className="text-2xl font-bold text-blue-400 mt-2">Hoje</div>
+          <div className="text-sm text-white/60">
+            {alerts.filter(a => {
+              const today = new Date().toDateString()
+              const alertDate = new Date(a.timestamp).toDateString()
+              return today === alertDate
+            }).length} novos
+          </div>
+        </CustomCard>
+      </div>
+
+      {/* Filters */}
+      <div className="flex gap-4 flex-wrap">
+        <CustomSelect
+          label="Tipo"
+          value={filterType}
+          onChange={setFilterType}
+          icon="category"
+          options={[
+            { value: 'all', label: 'Todos' },
+            { value: 'supply', label: 'Consumíveis', icon: 'inventory_2' },
+            { value: 'status', label: 'Status', icon: 'power' },
+            { value: 'maintenance', label: 'Manutenção', icon: 'build' },
+            { value: 'system', label: 'Sistema', icon: 'settings' }
+          ]}
+        />
+
+        <CustomSelect
+          label="Estado"
+          value={filterRead}
+          onChange={setFilterRead}
+          icon="mail"
+          options={[
+            { value: 'all', label: 'Todos' },
+            { value: 'unread', label: 'Não Lidas' },
+            { value: 'read', label: 'Lidas' }
+          ]}
+        />
+
+        <CustomSelect
+          label="Ordenar"
+          value={sortBy}
+          onChange={setSortBy}
+          icon="sort"
+          options={[
+            { value: 'date', label: 'Data (mais recente)' },
+            { value: 'priority', label: 'Prioridade (maior primeiro)' }
+          ]}
+        />
+      </div>
+
+      {/* Alerts List */}
+      <div className="space-y-3">
+        {filteredAlerts.map(alert => {
+          const priorityInfo = getPriorityIcon(alert.priority)
+          return (
+            <CustomCard
+              key={alert.id}
+              hover
+              className={`${!alert.read ? 'bg-white/8 border-l-4 border-cyan-500' : 'bg-white/3'}`}
+            >
+              <div className="flex items-start gap-4">
+                <span className={`mi text-3xl text-${priorityInfo.color}-400`}>
+                  {priorityInfo.icon}
+                </span>
+
                 <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className={`px-2 py-1 rounded text-xs font-semibold ${alert.type === 'low-supply' ? 'bg-orange-500/20 text-orange-300' : 'bg-red-500/20 text-red-300'
-                      }`}>
-                      {alert.type === 'low-supply' ? 'Consumível Baixo' : alert.type}
-                    </span>
-                    <span className="text-xs text-white/50">{new Date(alert.ts).toLocaleString()}</span>
-                  </div>
-                  <div className="mt-2">
-                    <div className="font-semibold">{alert.deviceName || alert.deviceId}</div>
-                    {alert.supply && (
-                      <div className="text-sm text-white/70">
-                        {alert.supply}: <span className="font-bold text-orange-300">{alert.level}%</span>
-                      </div>
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h3 className="font-semibold">{alert.title || 'Alerta'}</h3>
+                      <p className="text-sm text-white/70 mt-1">{alert.message}</p>
+                    </div>
+                    {!alert.read && (
+                      <span className="px-2 py-0.5 bg-cyan-500/20 text-cyan-300 text-xs rounded-full">
+                        Novo
+                      </span>
                     )}
                   </div>
+
+                  <div className="flex items-center gap-4 text-xs text-white/50">
+                    <span className="flex items-center gap-1">
+                      <span className="mi text-sm">schedule</span>
+                      {alert.timestamp ? new Date(alert.timestamp).toLocaleString('pt-BR') : 'Agora'}
+                    </span>
+                    {alert.device && (
+                      <span className="flex items-center gap-1">
+                        <span className="mi text-sm">print</span>
+                        {alert.device}
+                      </span>
+                    )}
+                    <span className={`px-2 py-0.5 rounded bg-${priorityInfo.color}-500/20 text-${priorityInfo.color}-300`}>
+                      {alert.priority || 'low'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  {!alert.read && (
+                    <CustomButton
+                      size="small"
+                      variant="ghost"
+                      icon="done"
+                      onClick={() => markAsRead(alert.id)}
+                    >
+                      Marcar Lida
+                    </CustomButton>
+                  )}
+                  <CustomButton
+                    size="small"
+                    variant="ghost"
+                    icon="delete"
+                    onClick={() => deleteAlert(alert.id)}
+                  >
+                    Remover
+                  </CustomButton>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            </CustomCard>
+          )
+        })}
       </div>
+
+      {filteredAlerts.length === 0 && (
+        <CustomCard className="text-center py-12">
+          <span className="mi text-6xl text-white/20 mb-4">notifications_off</span>
+          <h3 className="text-xl font-semibold mb-2">Nenhum alerta</h3>
+          <p className="text-white/60">
+            {alerts.length === 0 ? 'Tudo está funcionando perfeitamente!' : 'Nenhum alerta corresponde aos filtros'}
+          </p>
+        </CustomCard>
+      )}
     </div>
   )
 }

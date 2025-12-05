@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import ProgressModal from './ProgressModal'
 
 export default function Status({ data }) {
   const [serverInfo, setServerInfo] = useState(null)
+  const [collecting, setCollecting] = useState(false)
   const devices = (data && data.devices) || []
   const total = devices.length
   const ok = devices.filter(d => d.status === 'ok').length
@@ -30,15 +32,22 @@ export default function Status({ data }) {
   }
 
   async function triggerCollection() {
+    setCollecting(true)
     try {
       const res = await fetch('/api/collect', { method: 'POST' })
       const json = await res.json()
-      if (json.ok) {
-        alert('Coleta iniciada com sucesso!')
-      }
+      // Don't close modal here - let it auto-close at 99% progress
+      // Modal onClose will trigger data refresh
     } catch (e) {
+      setCollecting(false)
       alert('Erro ao iniciar coleta: ' + e.message)
     }
+  }
+
+  async function handleCollectionClose() {
+    setCollecting(false)
+    // Data will auto-refresh after 30s interval in App.jsx
+    // Or user can manually click refresh
   }
 
   return (
@@ -120,6 +129,14 @@ export default function Status({ data }) {
           </button>
         </div>
       </div>
+
+      <ProgressModal
+        open={collecting}
+        title="Coletando Impressoras"
+        message="Escaneando rede em busca de impressoras... (~1778 IPs)"
+        estimatedSeconds={420}
+        onClose={handleCollectionClose}
+      />
     </div>
   )
 }
