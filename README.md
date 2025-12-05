@@ -1,6 +1,6 @@
 # Network Printer Solution
 
-Sistema de monitoramento de impressoras em rede para gestão de suprimentos e status de dispositivos HP.
+Sistema de monitoramento para impressoras em rede: gestão de suprimentos e status de dispositivos HP.
 
 ## 📁 Estrutura do Projeto
 
